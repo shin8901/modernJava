@@ -117,6 +117,92 @@ public interface ApplePredicate {
 	boolean test(Apple apple);
 }
 
+class AppleHeavyWeightPredicate implements ApplePredicate {
+
+	@Override
+	public boolean test(Apple apple) {
+		return apple.getWeight() > 150;
+	}
+}
+
+class AppleGreenColorPredicate implements ApplePredicate {
+
+	@Override
+	public boolean test(Apple apple) {
+		return Color.GREEN.equals(apple.getColor());
+	}
+}
+
+여러버전의 내용들 가능~
+
+위 프레디케이트 에 따라 fitler메소드가 다르게 동작 하게하는 패턴
+
+	- 전략 디자인 패턴이다 이마리야
+	- 전략 디자인 패턴  : 전략이라 불릴만한 알고리즘을 캡슐화해서 알고리즘 패밀리를 정의해뒀다가 
+					런타임때 선택!
+		ApplePredicate 가 패밀리
+		AppleHeavyWeightPredicate, AppleGreenColorPredicate 가 전략인셈.
+		
+filterApples 에서 ApplePredicate 객체를 받아 애플의 조건을 검사하도록 고쳐야함.
+전략을 받아서 처리하는것. -> 동적 파라미터화다 이마리야.
+		
+2.2.1 네번째 시도 : 추상 조건으로 필터링
+
+	public static void main(String[] args) {
+		List<Apple> inventory = new ArrayList<>();
+		filterApples(inventory, new AppleHeavyWeightPredicate());
+	}
+
+	public static List<Apple> filterApples(List<Apple> inventory, ApplePredicate p) {
+		List<Apple> result = new ArrayList<>();
+		for (Apple apple : inventory) {
+			if (p.test(apple)) {
+				result.add(apple);
+			}
+		}
+		return result;
+	}
+	
+	너무 이쁘지 않니..
+	
+	솔직히 첫번째 소스, 족같은 Test3보다 훨씬 유연한 소스임.
+	가독도 너무 좋고, 사용하기도 쉬워졌다.
+	
+2.3.1 익명 클래스
+
+	미리 준비된 내용들을 사용하는 방법도 있지만, 익명클래스 를 이용해서 전략을 만들어서 넣어봅시다.
+	
+2.3.2 다섯번째 시도: 익명클래스의 사용 : Test5
+
+	filterApples(inventory, new ApplePredicate() {
+		@Override
+		public boolean test(Apple apple) {
+			return apple.getWeight() > 200;
+		}
+	});
+	
+	옴마야 멋지다.
+	
+	
+	** 코드의 장황함은 나쁜 특성이다. 장황한 코드는 구현하고 유지보수하는데 시간이 오래걸리고..
+	잔소리잔소리... 솔직히 Test3 소스는 개발자가 아니라 코더가 짜는 소스.
+	도태 되지 말자.
+	
+	익명클래스로 짠 부분이 축약된 부분이 여러부분 있지만, 결국 객체를 만들고
+	명시적으로 메서드를 새로 정의하는 점은 변하지않는다.
+	
+	자바 8에서는 좀더 간단한 방법을 제공한다.
+	
+2.3.3 여섯번째 시도 : 람다표현식 : Test6
+
+	자바 8 람다의 위용을 보라
+	
+	filterApples(inventory, (Apple p) -> Color.GREEN.equals(p.getColor()));
+	
+	Test5 에 비해서 많이 짧아졌다. 존내 간결하네.
+	
+	
+	
 
 
 
