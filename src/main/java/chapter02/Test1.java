@@ -1,4 +1,4 @@
-package inActionJava.chapter02;
+package chapter02;
 
 import java.util.ArrayList;
 import java.util.List;

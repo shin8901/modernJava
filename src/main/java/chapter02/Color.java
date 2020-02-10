@@ -1,4 +1,4 @@
-package inActionJava.chapter02;
+package chapter02;
 
 public enum Color {
 

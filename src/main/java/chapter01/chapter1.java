@@ -1,4 +1,4 @@
-package inActionJava.chapter01;
+package chapter01;
 
 public class chapter1 {
 

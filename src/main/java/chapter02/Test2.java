@@ -1,4 +1,4 @@
-package inActionJava.chapter02;
+package chapter02;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +26,7 @@ public class Test2 {
 	public static List<Apple> filterRedApples(List<Apple> inventory) {
 		return filterApplesByColor(inventory, Color.RED);
 	}
-	
-	
+
 	public static List<Apple> filterApplesByWeight(List<Apple> inventory, int weight) {
 		List<Apple> result = new ArrayList<>();
 		for (Apple apple : inventory) {
