@@ -64,7 +64,114 @@ Comparator<Apple> byWeight = (Apple a1, Apple a2) -> Integer.compare(a1.getWeigh
 (람다 파라미터)          	화살표	람다 바디
 
 파라미터 리스트 :
+
+	Comparator의 compare 메소드 파라미터(사과 두개)
+
+화살표 :
+	화살표(->)는 람다 파라미터 리스트와 바디를 구분한다
+
+람다 바디:
+	두 사과의 무게를 비교한다. 람다의 반환값에 해당하는 표현식이다.
 	
+	
+람다표현 5가지
+	(String s) -> s.length() 
+		Strig 형식의 파라미터 하나를 가짐.
+		int 형 반환 
+		람다 표현식에는 return이 함축, 명시적으로 사용하지 않아도됨. (생략가능)
+	
+	(Apple a) -> a.getWeight() > 150
+		Apple 형식의 파라미터를 하나를 가짐.
+		boolean 타입 반환
+	
+	(int x, int y) -> {
+		System.out.println("result:");
+		System.out.println(x+y);
+	}
+		int 파라미터 2개 , 리턴이없음.(void 리턴)
+		람다표현식은 여러행의 문장을 포함가능.
+	
+	() -> 42
+		파라미터가 없으며 int 42를 반환.
+	
+	(Apple a1, Apple a2) 	-> 		Integer.compare(a1.getWeight(), a2.getWeight())
+		Apple타입 2개, 두사과의 무게를 비교 함.
+		
+***********************************
+표현식 	parameter -> expression
+
+블럭방식 	parameter -> {statement}
+**********************************
+
+() -> {}										O
+() -> "Raoul"									O
+() -> { return "Mario"; }						O
+(Integer i) -> return "Alan"+i					X
+(String s) -> {"Iron Man";}						X
+
+X 두개 설명
+
+4. 리턴 은 흐름제어문, (Integer i) -> {return "Alan"+i;} 이 되어야 맞다.
+5. "Iron Man"는 구문이 아니라 표현식
+	(String s) -> "Iron Man"		 
+	(String s) -> { return "Iron Man";}
+	으로 사용해야함.		
+
+boolean 표현식		(List<String> list) -> list.isEmpty()
+객체 생성				() -> new Appl(10)
+객체 소비				(Apple a) -> {
+						sysout(a.getWeight());
+					}
+객체에서 선택/추출		(String s) -> s.length()
+두 값을 조합				(int a, int b) -> a * b
+두 객체 비교				(Apple a1, Apple a2) ->	Integer.compare(a1.getWeight(), a2.getWeight())
+
+
+	
+3.2 어디에 어떻게 람다를 사용?!?!
+
+
+3.2.1 함수형 인터페이스
+
+public interface Predicate<T>{
+	boolean test(T t);
+}
+
+
+해당 인터페이스는 2장에서 사용한 Predicate 
+오직 하나의 추상메서드를 지정하고 있음.
+
+*** 함수형 인터페이스는 정확히 하나의 추상메서드를 지정하는 인터페이스임.
+** 	Comparartor, Runnable 등등의 예제가 있둠..
+
+*9장에서 설명하겠지만 인터페이스는 디폴트 메서드(인터페이스의 메서드를 구현하지않은 클래스를 고려해서 기본 구현을 제공한느 바디를 포함하는 메서드)
+를 포함할 수 있다. 많은 디폴트 메서드가 있더라도, 추상메서드가 오직하나믄 함수형 인터페이스이다.
+
+*** 함수형 인터페이스
+
+ 함수형 인터페이스(ㅇ)
+public interface Adder{
+	int add(int a, int b);
+}
+
+함수형 인터페이스(x)
+public interface SmartAdder extends Adder{
+	int add(double a, double b);
+}
+
+함수형 인터페이스(x)
+public interface Nothing{
+	
+}
+
+
+람파표현식으로 함수형 인터페이스의 추상메서드 구현을 직접 전달 할 수 있으므로, 
+전체 표현식을 함수형 인터페이스의 인스턴스로 취급(기술적으로 따지면,함수형 인터페이스를 구현한 클래스의 인스턴스).
+
+Runnable 인터페이스로 표현한다믄
+
+
+
 
 
 
