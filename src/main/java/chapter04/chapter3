@@ -32,6 +32,17 @@ JAVA 8에 새로 추가된 기능. 스트림을 이용하면 선언형(아까 �
 데이터 컬렉션 반복을 멋지게 처리하는 방법쯤으로 생각
 
 
+java 7 코드
+List<Dish> lowCaloricDishes = new ArrayList<>();
+for(Dish dish : menu)
+{
+	if(dish.getCalories() < 400)
+	{
+		lowCaloricDishes.add(dish);
+	}
+}
+
+
 ** 병렬처리는 chapter07
 
 	선언형으로 코드를 구현 할 수 있음. 루프,if 등의 제어 블록 없이

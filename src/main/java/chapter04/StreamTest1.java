@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+//java 7 코드
 public class StreamTest1 {
 
 	// java 7 예제
